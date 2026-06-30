@@ -1363,12 +1363,11 @@ Var_{\boldsymbol{\theta}}\left[U_i\right] &amp;= Var_{\boldsymbol{\theta}}\left[
 \boldsymbol{Y}_n \xrightarrow{d} \boldsymbol{Y} \iff \boldsymbol{\lambda}^\top \boldsymbol{Y}_n \xrightarrow{d} \boldsymbol{\lambda}^\top \boldsymbol{Y} \quad \text{para todo vetor fixo } \boldsymbol{\lambda}
 \]</span> Como <span class="math inline">\(U_i\)</span> foi definida para um <span class="math inline">\(\boldsymbol{\lambda}\)</span> qualquer e mostramos o seguinte: <span class="math display">\[
 \boldsymbol{\lambda}^{\intercal}\sqrt{n}\left[ \boldsymbol{m_{n}} - \boldsymbol{h}(\boldsymbol{\theta})\right] \xrightarrow{d} \boldsymbol{\lambda}^{\intercal}\boldsymbol{J},\quad \text{onde } \boldsymbol{J}\sim\mathcal{N}_k(\boldsymbol{0}_{k\times1},\boldsymbol{\Sigma}_{k\times k})\text{ e } \boldsymbol{\lambda}^{\intercal}\boldsymbol{J}\sim N(0,\boldsymbol{\lambda}^{\intercal} \boldsymbol{\Sigma}\boldsymbol{\lambda}).
-\]</span> Podemos utilizar o teorema para dizer que:</p>
-<div id="eq-normal">
+\]</span></p>
+<p><strong>Resultado 1:</strong></p>
 <p><span class="math display">\[
 \sqrt{n}\left[ \boldsymbol{m_{n}} - \boldsymbol{h}(\boldsymbol{\theta})\right] \xrightarrow{d} \boldsymbol{J}.
 \]</span></p>
-</div>
 </section>
 <section class="slide level3">
 
@@ -1395,12 +1394,14 @@ Var_{\boldsymbol{\theta}}\left[U_i\right] &amp;= Var_{\boldsymbol{\theta}}\left[
 \boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) = \boldsymbol{h(\theta)}\Big{|}_{\boldsymbol{\theta}=\boldsymbol{\theta_0}} + \boldsymbol{H(\theta)}\Big{|}_{\boldsymbol{\theta}=\boldsymbol{\theta}^*}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u} - \boldsymbol{\theta_0})
 \]</span> Vamos adicionar e subtrair <span class="math inline">\(\boldsymbol{H(\theta_0)}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}-\boldsymbol{\theta_0})\)</span></p>
 <p><span class="math display">\[
+\small{
 \begin{align}
 \boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) &amp;= \boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta^*)}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u} - \boldsymbol{\theta_0}) + \boldsymbol{H(\theta_0)}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}-\boldsymbol{\theta_0}) - \boldsymbol{H(\theta_0)}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}-\boldsymbol{\theta_0})=\\
 &amp;=\boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta^*)}(\frac{1}{\sqrt{n}}\boldsymbol{u} ) + \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u})- \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u})=\\
 &amp;=\boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta^*)}(\frac{1}{\sqrt{n}}\boldsymbol{u} ) + \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u})- \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u})=\\
 &amp;=\boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u}) + \left[ \boldsymbol{H(\theta^*)} - \boldsymbol{H(\theta_0)}\right](\frac{1}{\sqrt{n}}\boldsymbol{u}).
 \end{align}
+}
 \]</span> Como <span class="math inline">\(\boldsymbol{\theta^*} \xrightarrow{n\to \infty} \boldsymbol{\theta_0}\)</span> e <span class="math inline">\(\boldsymbol{H(\theta^*)} \xrightarrow{n\to \infty} \boldsymbol{H(\theta_0)}\)</span>, então</p>
 <p><span class="math display">\[
 \boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) =\boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u}) + o(1).
@@ -1494,7 +1495,7 @@ E_\boldsymbol{\theta}[X^3]-E_{\boldsymbol{\theta}}[X^2].E_{\boldsymbol{\theta}}[
 \end{bmatrix},
 \]</span></p>
 <p>isto é <span class="math display">\[
-\scriptsize{
+\Tiny{
 \boldsymbol{\Sigma} = \begin{bmatrix}
     \dfrac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} - \left( \dfrac{\alpha}{\alpha + \beta} \right)^2 &amp; \dfrac{\alpha(\alpha + 1)(\alpha + 2)}{(\alpha + \beta)(\alpha + \beta + 1)(\alpha + \beta + 2)} - \left( \dfrac{\alpha}{\alpha + \beta} \right) \left( \dfrac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} \right) \\ \\
     \dfrac{\alpha(\alpha + 1)(\alpha + 2)}{(\alpha + \beta)(\alpha + \beta + 1)(\alpha + \beta + 2)} - \left( \dfrac{\alpha}{\alpha + \beta} \right) \left( \dfrac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} \right) &amp; \dfrac{\alpha(\alpha + 1)(\alpha + 2)(\alpha + 3)}{(\alpha + \beta)(\alpha + \beta + 1)(\alpha + \beta + 2)(\alpha + \beta + 3)} - \left( \dfrac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} \right)^2
@@ -1514,8 +1515,8 @@ E_\boldsymbol{\theta}[X^3]-E_{\boldsymbol{\theta}}[X^2].E_{\boldsymbol{\theta}}[
 <section>
 <section id="simulação" class="title-slide slide level2 center">
 <h2>Simulação</h2>
-<p>Sejam <span class="math inline">\(X_1, ..., X_n\)</span> variáveis aleatórias i.i.d com distribuição, <span class="math display">\[
-X\sim Beta(2,3)
+<p>Amostras geradas pela distribução <span class="math display">\[
+X\sim Beta(2,3).
 \]</span></p>
 <div class="cell">
 
