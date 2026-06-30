@@ -1,0 +1,535 @@
+---
+title: "Método de Momentos: Propriedades Assintóticas"
+author: "Jaqueline Lamas da Silva"
+date-format: "DD/MM/YYYY" 
+date: "2026-06-30" 
+footer: "Teoria Assintótica (MAE5917) - IME/USP"
+format: 
+  revealjs:
+    logo: logo.png 
+    css: custom.css
+    revealjs-pdf: default
+    code-fold: true
+    code-copy: true
+embed-resources: true
+slide-level: 3
+slide-number: true
+toc: true
+toc-depth: 2
+toc-title: "Sumário:"
+toccolor: "black"
+lang: pt
+crossref:
+  thm-title: "Resultado"
+  thm-prefix: "Resultado"
+include-in-header:
+      - text: |
+          <script>
+          window.MathJax = {
+            output: {
+              font: 'mathjax-stix2'
+            }
+          };
+          </script>
+---
+
+## Introdução
+O método determina estimadores estabelecendo uma relação entre os momentos amostrais $\boldsymbol{m_n}$ e os momentos populacionais $\boldsymbol{h}(\boldsymbol\theta)$.
+
+
+## Estimador de momentos
+
+Sejam  $X_1, ..., X_n$ variáveis aleatórias i.i.d com distribuição,
+$$
+X\sim f(x,\boldsymbol{\theta}),\  \boldsymbol{\theta}  \in \Theta \subset \mathbb{R}^k, k\geq1
+$$
+Considere a seguinte função
+$$
+\boldsymbol{g}(X) = \left[
+\begin{matrix}
+g_1(X) \\
+\vdots \\
+g_k(X)
+\end{matrix}
+\right]_{k\times1}.
+$$
+
+Dessa forma, os momentos amostrais baseados em $g$ são:
+$$
+\begin{align}
+\boldsymbol{m_{n}} = \left[\begin{matrix}
+\frac{1}{n}\sum_{i=1}^{n}g_1(X_i) \\
+\vdots \\
+\frac{1}{n}\sum_{i=1}^{n}g_k(X_i) \\
+\end{matrix}
+\right] = \left[\begin{matrix}
+m_n^{(1)} \\
+\vdots\\
+m_n^{(k)}
+\end{matrix}\right]_{k\times1}.
+\end{align}
+$$
+Em sua formulação mais tradicional $g_j(X)= X^j$.
+
+---
+
+
+Os momentos populacionais são obtidos da seguinte forma:
+$$
+\boldsymbol{h(\theta)} = \left[\begin{matrix}
+E_{\theta}\left[ g_1(X)\right] \\
+\vdots \\
+E_{\theta}\left[ g_k(X)\right] \\
+\end{matrix}
+\right] = \left[\begin{matrix}
+h_1(\boldsymbol{\theta}) \\
+\vdots\\
+h_k(\boldsymbol{\theta})
+\end{matrix}\right]_{k\times1}
+$$
+
+Com base nisso, o estimador dos momentos $\boldsymbol{\hat{\theta}_{M}}$ é obtido pela solução das equações:
+$$
+\boldsymbol{h(\theta)} = \boldsymbol{m_{n}}.
+$$
+
+## Normalidade Assintótica
+\n
+**Suposições:**
+
+* $\mathbb{P}_{\boldsymbol{\theta}}\Vert g\Vert^2 = E_{\boldsymbol{\theta}}\left[ \sum_{j=1}^k{g_j(X)}^2\right]< \infty$;
+
+* $h_j(\boldsymbol{\theta}) < \infty, j=1,\dots, 2k$ (caso simples $g_j(X) = X^j$);
+
+* $\boldsymbol{H}(\boldsymbol{\theta})$ deve ter posto completo e seus elementos devem ser funções contínuas de $\boldsymbol{\theta}$.
+
+**Teorema:**
+
+Considerando o cenário proposto e assumindo que as suposições descritas sejam válidas, verifica-se que:
+
+$$
+ \boldsymbol{\sqrt{n}(\boldsymbol{\hat{\theta}}_M - \boldsymbol{\theta_0})} \xrightarrow{d} \mathcal{N}_k(\boldsymbol{0}, [\boldsymbol{H(\theta_0)}]^{-1}\boldsymbol{\Sigma}\{[\boldsymbol{H(\theta_0)}]^{-1}\}^\intercal).
+$$
+
+## Normalidade Assintótica (PROVA)
+
+Considere $\boldsymbol{\lambda} \in \mathbb{R}^k$ um vetor arbitrário, podemos definir uma sequência de variáveis aleatórias i.i.d da seguinte forma:
+
+$$
+\begin{align}
+U_i &= \boldsymbol{\lambda}^{\intercal}\left[\boldsymbol{g}(X_i) - \boldsymbol{h}(\boldsymbol{\theta})\right] =\\
+&=\sum_{j=1}^{k}\lambda_j\left[g_j(X_i) - h_i(\boldsymbol{\theta})\right]
+\end{align}
+$$
+Não é difícil mostrar que $E_\boldsymbol{\theta}\left[U_i\right] = 0$:
+$$
+\begin{align}
+E_\boldsymbol{\theta}\left[U_i\right] &= E_\boldsymbol{\theta}\left[\boldsymbol{\lambda}^{\intercal}\left\{ \boldsymbol{g}(X_i) - \boldsymbol{h}(\boldsymbol{\theta})\right\}\right] =\\
+&=\boldsymbol{\lambda}^{\intercal}\left\{E_\boldsymbol{\theta}\left[ \boldsymbol{g}(X_i) - \boldsymbol{h}(\boldsymbol{\theta})\right]\right\} =\\
+&=\boldsymbol{\lambda}^{\intercal}\left\{E_\boldsymbol{\theta}\left[ \boldsymbol{g}(X_i)\right] -  \boldsymbol{h}(\boldsymbol{\theta}) \right\}=\\
+&=\boldsymbol{\lambda}^{\intercal}\left\{\boldsymbol{h}(\boldsymbol{\theta})  -  \boldsymbol{h}(\boldsymbol{\theta}) \right\}=\\
+&=\boldsymbol{\lambda}_{1\times k}^{\intercal}\left\{\mathbf{0} \right\}_{k\times 1}=\\
+&=0.
+\end{align}
+$$
+
+---
+
+Além disso, $Var_{\boldsymbol{\theta}}\left[U_i\right] = \boldsymbol{\lambda}^{\intercal} \boldsymbol{\Sigma}\boldsymbol{\lambda}$, onde $\boldsymbol{\Sigma} = Cov_{\boldsymbol{\theta}}\left[\boldsymbol{g}(X_i)\right]$
+
+$$
+\begin{align}
+Var_{\boldsymbol{\theta}}\left[U_i\right] &= Var_{\boldsymbol{\theta}}\left[\boldsymbol{\lambda}^{\intercal}\left\{ \boldsymbol{g}(X_i) - \boldsymbol{h}(\boldsymbol{\theta})\right\}\right] =\\
+&=Var_{\boldsymbol{\theta}}\left[\boldsymbol{\lambda}^{\intercal}\boldsymbol{g}(X_i)\right]=  \\
+&=\boldsymbol{\lambda}^{\intercal}Cov_{\boldsymbol{\theta}}\left[\boldsymbol{g}(X_i)\right]\boldsymbol{\lambda} \\
+&=\boldsymbol{\lambda}_{1\times k}^{\intercal} \boldsymbol{\Sigma}_{k\times k}\boldsymbol{\lambda}_{k\times1}.
+\end{align}
+$$
+
+Como as variáveis aleatórias $U_i$ são independentes e identicamente distribuídas, com média 0 e variância $\boldsymbol{\lambda}^{\intercal} \boldsymbol{\Sigma}\boldsymbol{\lambda}$, pelo TCL, temos que:
+
+$$
+\frac{1}{\sqrt{n}}\sum_{i=1}^{n}U_i \xrightarrow{d} N(0, \boldsymbol{\lambda}^{\intercal} \boldsymbol{\Sigma}\boldsymbol{\lambda})
+$$
+
+---
+
+Temos também que
+$$
+\begin{align}
+\frac{1}{\sqrt{n}}\sum_{i=1}^{n}U_i&=\frac{1}{\sqrt{n}}\sum_{i=1}^{n}\boldsymbol{\lambda}^{\intercal}\left[\boldsymbol{g}(X_i) - \boldsymbol{h}(\boldsymbol{\theta})\right]=\\
+&=\boldsymbol{\lambda}^{\intercal}\frac{1}{\sqrt{n}}\left[\sum_{i=1}^{n}\boldsymbol{g}(X_i) - n.\boldsymbol{h}(\boldsymbol{\theta})\right] =\\
+&=\boldsymbol{\lambda}^{\intercal}\sqrt{n}\left[\frac{1}{n}\sum_{i=1}^{n}\boldsymbol{g}(X_i)- \boldsymbol{h}(\boldsymbol{\theta})\right] =\\
+&=\boldsymbol{\lambda}^{\intercal}\sqrt{n}\left[ \boldsymbol{m_{n}} - \boldsymbol{h}(\boldsymbol{\theta})\right].
+\end{align}
+$$
+Ou seja,
+
+$$
+\boldsymbol{\lambda}^{\intercal}\sqrt{n}\left[ \boldsymbol{m_{n}} - \boldsymbol{h}(\boldsymbol{\theta})\right] \xrightarrow{d} N(0,\boldsymbol{\lambda}^{\intercal} \boldsymbol{\Sigma}\boldsymbol{\lambda}).
+$$
+
+---
+
+\n\n
+#### Teorema de Cramér-Wold: {#slide-resultado1}
+$$
+\boldsymbol{Y}_n \xrightarrow{d} \boldsymbol{Y} \iff \boldsymbol{\lambda}^\top \boldsymbol{Y}_n \xrightarrow{d} \boldsymbol{\lambda}^\top \boldsymbol{Y} \quad \text{para todo vetor fixo } \boldsymbol{\lambda}
+$$
+Como $U_i$ foi definida para um $\boldsymbol{\lambda}$ qualquer e mostramos o seguinte:
+$$
+\boldsymbol{\lambda}^{\intercal}\sqrt{n}\left[ \boldsymbol{m_{n}} - \boldsymbol{h}(\boldsymbol{\theta})\right] \xrightarrow{d} \boldsymbol{\lambda}^{\intercal}\boldsymbol{J},\quad \text{onde } \boldsymbol{J}\sim\mathcal{N}_k(\boldsymbol{0}_{k\times1},\boldsymbol{\Sigma}_{k\times k})\text{ e } \boldsymbol{\lambda}^{\intercal}\boldsymbol{J}\sim N(0,\boldsymbol{\lambda}^{\intercal} \boldsymbol{\Sigma}\boldsymbol{\lambda}).
+$$
+Podemos utilizar o teorema para dizer que:
+
+::: {#eq-normal}
+$$
+\sqrt{n}\left[ \boldsymbol{m_{n}} - \boldsymbol{h}(\boldsymbol{\theta})\right] \xrightarrow{d} \boldsymbol{J}.
+$$
+:::
+
+---
+
+#### Expansão em série de Taylor:
+Considere $\boldsymbol{u}$ um vetor em $\mathbb{R}^k$, vamos expandir a função $\boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u})$ em torno de $\boldsymbol{\theta_0}$.
+
+Para isso, considere também $\boldsymbol{H}(\boldsymbol{\theta})_{k\times k} = \frac{\partial \boldsymbol{h}(\boldsymbol{\theta})}{\partial \boldsymbol{\theta^\intercal}}$, ou seja,
+$$
+\boldsymbol{H}(\boldsymbol{\theta})_{k\times k} = \left[\begin{matrix}
+\frac{\partial h_1(\boldsymbol{\theta})}{\partial \theta_1} \frac{\partial h_1(\boldsymbol{\theta})}{\partial \theta_2}  \cdots \frac{\partial h_1(\boldsymbol{\theta})}{\partial \theta_k} \\
+\frac{\partial h_2(\boldsymbol{\theta})}{\partial \theta_1}  \frac{\partial h_2(\boldsymbol{\theta})}{\partial \theta_2} \cdots \frac{\partial h_2(\boldsymbol{\theta})}{\partial \theta_k} \\
+\vdots \quad \quad \ddots \quad \quad \vdots\\
+\frac{\partial h_k(\boldsymbol{\theta})}{\partial \theta_1} \frac{\partial h_k(\boldsymbol{\theta})}{\partial \theta_2}  \cdots \frac{\partial h_k(\boldsymbol{\theta})}{\partial \theta_k} \\
+\end{matrix}\right].
+$$
+
+Além disso, definimos $\boldsymbol{\theta^*} = \boldsymbol{\theta_0}+\frac{1}{\sqrt{n}} t.\boldsymbol{u}$, onde $0\leq t \leq1$ (entre $\boldsymbol{\theta_0}$ e $\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}$):
+
+* $t=0, \boldsymbol{\theta^*}= \boldsymbol{\theta_0}$;
+* $t=1, \boldsymbol{\theta^*}= \boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}$;
+* $\boldsymbol{\theta^*} \xrightarrow{n\to \infty} \boldsymbol{\theta_0}$.
+
+---
+
+Com isso, temos que:
+$$
+\boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) = \boldsymbol{h(\theta)}\Big{|}_{\boldsymbol{\theta}=\boldsymbol{\theta_0}} + \boldsymbol{H(\theta)}\Big{|}_{\boldsymbol{\theta}=\boldsymbol{\theta}^*}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u} - \boldsymbol{\theta_0})
+$$
+Vamos adicionar e subtrair $\boldsymbol{H(\theta_0)}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}-\boldsymbol{\theta_0})$
+
+$$
+\begin{align}
+\boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) &= \boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta^*)}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u} - \boldsymbol{\theta_0}) + \boldsymbol{H(\theta_0)}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}-\boldsymbol{\theta_0}) - \boldsymbol{H(\theta_0)}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}-\boldsymbol{\theta_0})=\\
+&=\boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta^*)}(\frac{1}{\sqrt{n}}\boldsymbol{u} ) + \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u})- \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u})=\\
+&=\boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta^*)}(\frac{1}{\sqrt{n}}\boldsymbol{u} ) + \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u})- \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u})=\\
+&=\boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u}) + \left[ \boldsymbol{H(\theta^*)} - \boldsymbol{H(\theta_0)}\right](\frac{1}{\sqrt{n}}\boldsymbol{u}).
+\end{align}
+$$
+Como $\boldsymbol{\theta^*} \xrightarrow{n\to \infty} \boldsymbol{\theta_0}$ e $\boldsymbol{H(\theta^*)}  \xrightarrow{n\to \infty} \boldsymbol{H(\theta_0)}$, então
+
+$$
+\boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) =\boldsymbol{h(\theta_0)} + \boldsymbol{H(\theta_0)}(\frac{1}{\sqrt{n}}\boldsymbol{u}) + o(1).
+$$
+
+---
+
+Após algumas manipulações, temos
+$$
+\boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) - \boldsymbol{h(\theta_0)} =  \frac{1}{\sqrt{n}} \boldsymbol{H(\theta_0)}.\boldsymbol{u} + o(1)
+$$
+
+$$
+\sqrt{n}\left[\boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) - \boldsymbol{h(\theta_0)}\right] =  \boldsymbol{H(\theta_0)}.\boldsymbol{u} + o(1)
+$$
+Se considerarmos $\boldsymbol{u}=\sqrt{n}(\boldsymbol{\hat{\theta}}_M - \boldsymbol{\theta_0})$ então $\boldsymbol{h}(\boldsymbol{\theta_0}+\frac{1}{\sqrt{n}}\boldsymbol{u}) = \boldsymbol{h}(\boldsymbol{\hat{\theta}_M})=\boldsymbol{m_n}$.
+
+Com isso,
+$$
+\sqrt{n}\left[\boldsymbol{m_n} - \boldsymbol{h(\theta_0)}\right] =  \boldsymbol{H(\theta_0)}.\boldsymbol{\sqrt{n}(\boldsymbol{\hat{\theta}}_M - \boldsymbol{\theta_0})} + o_p(1).
+$$
+$$
+\sqrt{n} \boldsymbol{[H(\theta_0)]^{-1}}\left[\boldsymbol{m_n} - \boldsymbol{h(\theta_0)}\right] =  \boldsymbol{\sqrt{n}(\boldsymbol{\hat{\theta}}_M - \boldsymbol{\theta_0})} + o_p(1).
+$$
+
+Pelo *Resultado 1* podemos concluir que:
+$$
+  \boldsymbol{\sqrt{n}(\boldsymbol{\hat{\theta}}_M - \boldsymbol{\theta_0})} \xrightarrow{d} \mathcal{N}_k(\boldsymbol{0}, [\boldsymbol{H(\theta_0)}]^{-1}\boldsymbol{\Sigma}\{[\boldsymbol{H(\theta_0)}]^{-1}\}^\intercal).
+$$
+
+## Método Delta Generalizado
+Voltando ao resultado obtido anteriormente,
+$$
+\sqrt{n}\left[ \boldsymbol{m_{n}} - \boldsymbol{h}(\boldsymbol{\theta})\right] \xrightarrow{d} \mathcal{N}_k(\boldsymbol{0}_{k\times1},\boldsymbol{\Sigma}_{k\times k}).
+$$
+Recorde que $\boldsymbol{m_n}=\boldsymbol{h}(\boldsymbol{\hat\theta_M})$, com isso,
+
+$$
+\sqrt{n}\left[ \boldsymbol{h}(\boldsymbol{\hat\theta_M}) - \boldsymbol{h}(\boldsymbol{\theta})\right] \xrightarrow{d} \mathcal{N}_k(\boldsymbol{0},\boldsymbol{\Sigma}).
+$$
+Seja $\boldsymbol{h}^{-1}$ a função inversa. A matriz jacobiana de $\boldsymbol{h}^{-1}$, pelo Teorema da Função Inversa é a matriz inversa da jacobiana da função $\boldsymbol{h}(\boldsymbol{\theta})$, ou seja, é igual a $[\boldsymbol{H(\theta)}]^{-1}$. Portanto, podemos aplicar o Método Delta Generalizado para dizer que:
+$$
+  \boldsymbol{\sqrt{n}(\boldsymbol{\hat{\theta}}_M - \boldsymbol{\theta})} \xrightarrow{d} \mathcal{N}_k(\boldsymbol{0}, [\boldsymbol{H(\theta)}]^{-1}\boldsymbol{\Sigma}\{[\boldsymbol{H(\theta)}]^{-1}\}^\intercal).
+$$
+Desse modo, alcançamos o resultado de normalidade assintótica por dois caminhos diferentes.
+
+## Exemplo
+Sejam  $X_1, ..., X_n$ variáveis aleatórias i.i.d com distribuição,
+$$
+X\sim Beta(\alpha,\beta),\  \boldsymbol{\theta}=(\alpha, \beta)^\intercal \in \Theta = \{ (\alpha, \beta) \in \mathbb{R}^2 : \alpha > 0, \beta > 0 \}
+$$
+$$
+\boldsymbol{g}(X) = \left[
+\begin{matrix}
+X \\
+X^2
+\end{matrix}
+\right]_{2\times1}
+$$
+$$
+\begin{align}
+\boldsymbol{m_{n}} = \left[\begin{matrix}
+\frac{1}{n}\sum_{i=1}^{n}X_i \\
+\frac{1}{n}\sum_{i=1}^{n}X_i^2 \\
+\end{matrix}
+\right] 
+\end{align}
+$$
+$$
+\boldsymbol{h(\theta)} = \left[\begin{matrix}
+E_{\theta}\left[ X\right] \\
+E_{\theta}\left[ X^2\right] \\
+\end{matrix}
+\right] = \left[\begin{matrix}
+\frac{\alpha}{\alpha+\beta} \\
+\frac{\alpha}{\alpha+\beta}.\frac{\alpha+1}{\alpha+\beta+1} 
+\end{matrix}\right]
+$$
+Os momentos teóricos de ordem $k$ de uma variável aleatória $X$ com distribuição $\text{Beta}(\alpha, \beta)$ é dado pela seguinte fórmula:
+$$E[X^k] = \frac{\Gamma(\alpha + k)\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\alpha + \beta + k)}.$$
+
+---
+
+Resolvendo o sistema de equações:
+$$
+\boldsymbol{h}(\boldsymbol{\theta})=\boldsymbol{m_{n}} 
+$$
+
+$$
+\begin{cases}
+     \frac{\alpha}{\alpha + \beta} = \frac{1}{n}\sum_{i=1}^{n}X_i \\
+     \frac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)}= 
+\frac{1}{n}\sum_{i=1}^{n}X_i^2 \\
+\end{cases},
+$$
+temos que $\boldsymbol{\hat{\theta}_M}$ é $(\hat\alpha,\hat\beta)^\intercal$ onde
+$$
+\small{
+\hat\alpha= \frac{\frac{1}{n}\sum_{i=1}^{n}X_i .\left(\frac{1}{n}\sum_{i=1}^{n}X_i  - \frac{1}{n}\sum_{i=1}^{n}X_i^2 \right)}{\frac{1}{n}\sum_{i=1}^{n}X_i^2 - [\frac{1}{n}\sum_{i=1}^{n}X_i]^2} \quad \text{e} \quad 
+\hat\beta=\frac{\left(1-\frac{1}{n}\sum_{i=1}^{n}X_i\right) .\left(\frac{1}{n}\sum_{i=1}^{n}X_i  - \frac{1}{n}\sum_{i=1}^{n}X_i^2 \right)}{\frac{1}{n}\sum_{i=1}^{n}X_i^2 - [\frac{1}{n}\sum_{i=1}^{n}X_i]^2}.}
+$$
+O resultado assintótico nos diz que:
+$$
+  \boldsymbol{\sqrt{n}(\boldsymbol{\hat{\theta}}_M - \boldsymbol{\theta})} \xrightarrow{d} \mathcal{N}_2(\boldsymbol{0}, [\boldsymbol{H(\theta)}]^{-1}\boldsymbol{\Sigma}\{[\boldsymbol{H(\theta)}]^{-1}\}^\intercal).
+$$
+onde $\boldsymbol{\Sigma}=Cov_\boldsymbol{\theta}(\boldsymbol{g}(X))$.
+
+---
+
+\n\n\n
+$$
+\boldsymbol{\Sigma} = \begin{bmatrix} 
+    E_\boldsymbol{\theta}[X^2]-\left\{ E_{\boldsymbol{\theta}}[X]\right\}^2 \quad\quad\quad E_\boldsymbol{\theta}[X^3]-E_{\boldsymbol{\theta}}[X^2].E_{\boldsymbol{\theta}}[X] \\ \\
+E_\boldsymbol{\theta}[X^3]-E_{\boldsymbol{\theta}}[X^2].E_{\boldsymbol{\theta}}[X] \quad \quad E_\boldsymbol{\theta}[X^4]-\left\{ E_{\boldsymbol{\theta}}[X^2]\right\}^2   
+\end{bmatrix},
+$$
+
+isto é
+$$
+\scriptsize{
+\boldsymbol{\Sigma} = \begin{bmatrix} 
+    \dfrac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} - \left( \dfrac{\alpha}{\alpha + \beta} \right)^2 & \dfrac{\alpha(\alpha + 1)(\alpha + 2)}{(\alpha + \beta)(\alpha + \beta + 1)(\alpha + \beta + 2)} - \left( \dfrac{\alpha}{\alpha + \beta} \right) \left( \dfrac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} \right) \\ \\
+    \dfrac{\alpha(\alpha + 1)(\alpha + 2)}{(\alpha + \beta)(\alpha + \beta + 1)(\alpha + \beta + 2)} - \left( \dfrac{\alpha}{\alpha + \beta} \right) \left( \dfrac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} \right) & \dfrac{\alpha(\alpha + 1)(\alpha + 2)(\alpha + 3)}{(\alpha + \beta)(\alpha + \beta + 1)(\alpha + \beta + 2)(\alpha + \beta + 3)} - \left( \dfrac{\alpha(\alpha + 1)}{(\alpha + \beta)(\alpha + \beta + 1)} \right)^2
+\end{bmatrix}.}
+$$
+
+---
+
+E, a matriz jacobiana da função $\boldsymbol{h}(\boldsymbol{\theta})$ é
+$$
+\small{
+\boldsymbol{H}(\boldsymbol{\theta}) = \begin{bmatrix} 
+    \dfrac{\beta}{(\alpha + \beta)^2} & \dfrac{-\alpha}{(\alpha + \beta)^2} \\ \\
+    \dfrac{\beta.\left(2\alpha\beta + 2\alpha^2+2\alpha+\beta+1\right)}{\left[(\alpha + \beta +1)(\alpha+\beta)\right]^2} & \dfrac{-\alpha\left(\alpha +1\right)\left(2\beta+2\alpha+1\right)}{(\alpha + \beta)^2}
+\end{bmatrix}.}
+$$
+
+## Simulação
+
+Sejam  $X_1, ..., X_n$ variáveis aleatórias i.i.d com distribuição,
+$$
+X\sim Beta(2,3)
+$$
+
+```{r, echo=FALSE}
+library("dplyr")
+library("kableExtra")
+library("knitr")
+options(kableExtra.latex.load_packages = TRUE)
+cores<-c("#c2a5cf","#BAF3DE","#C9E69E","#FF9B95","#FFC29A")
+```
+
+```{r, results='asis', echo=TRUE}
+set.seed(123)
+theta.verd<-c(2,3)
+sizes<-c(20,30,80,200,500)
+gera<-function(n) {replicate(1000, rbeta(n, shape1 = theta.verd[1], shape2 = theta.verd[2]))}
+amostras<-sapply(sizes,gera)
+# Matriz H(theta)
+matriz.H<-function(alfa, beta)
+{
+  H<-matrix(0,nrow = 2,ncol=2)
+  H[1,1]<-beta/(alfa+beta)^2
+  H[1,2]<-(-alfa)/(alfa+beta)^2
+  H[2,1]<-beta*(2*alfa*beta+2*alfa^2+2*alfa+beta+1)/( (alfa+beta+1)*(alfa+beta) )^2
+  H[2,2]<-( (-alfa)*(alfa+1)*(2*beta+2*alfa+1) )/( (alfa+beta+1)*(alfa+beta) )^2
+  return(H)
+}
+H<-matriz.H(alfa=2,beta=3)
+H.inversa<-solve(H)
+```
+
+
+```{r, results='asis', echo=TRUE}
+matriz.Sigma <- function(alfa, beta)
+{
+  Sigma <- matrix(0, 2, 2)
+  Sigma[1,1] <- (alfa * (alfa + 1)) / ((alfa + beta) * (alfa + beta + 1)) - 
+                (alfa / (alfa + beta))^2
+  Sigma[1,2] <- (alfa * (alfa + 1) * (alfa + 2)) / ((alfa + beta) * (alfa + beta + 1) * (alfa + beta + 2)) - 
+                (alfa / (alfa + beta)) * ((alfa * (alfa + 1)) / ((alfa + beta) * (alfa + beta + 1)))
+  Sigma[2,1] <- Sigma[1,2] # A matriz é simétrica
+  Sigma[2,2] <- (alfa * (alfa + 1) * (alfa + 2) * (alfa + 3)) / ((alfa + beta) * (alfa + beta + 1) * (alfa + beta + 2) * (alfa + beta + 3)) - 
+                ((alfa * (alfa + 1)) / ((alfa + beta) * (alfa + beta + 1)))^2
+  return(Sigma)
+}
+Sigma<-matriz.Sigma(2,3)
+
+# [H'(θ)]Σt([H'(θ)]) / n é a variância teórica
+
+n.var.teorica<-( H.inversa%*%Sigma%*%t(H.inversa) )
+```
+
+
+```{r, results='asis', echo=TRUE}
+estimador.momentos<-function(i)
+{
+  amostra=amostras[[i]]
+  n<-dim(amostra)[1]
+  X.barra<-apply(amostra,2,mean)
+  X.barra.2<-apply(amostra^2, 2,mean)
+  
+  # Estimador
+  alfa.hat<-X.barra*(X.barra - X.barra.2)/(X.barra.2 - (X.barra^2))
+  beta.hat<-(1-X.barra)*(X.barra - X.barra.2)/(X.barra.2 - (X.barra^2))
+  
+  # Variância empírica
+  sd.alfa<-sd(alfa.hat)
+  sd.beta<-sd(beta.hat)
+  
+  # Variancia teórica
+  ep.alfa<-sqrt(n.var.teorica[1,1]/n)
+  ep.beta<-sqrt(n.var.teorica[2,2]/n)
+  
+  return(list(alfa=mean(alfa.hat), sd.a=sd.alfa,ep.a=ep.alfa, beta=mean(beta.hat), sd.b=sd.beta, ep.b=ep.beta, alfas=alfa.hat, betas=beta.hat))
+  
+}
+```
+
+
+```{r, results='asis'}
+estimativas<-lapply(1:5,estimador.momentos)
+
+tabela<-vector("list",5)
+for(i in 1:5){
+  tabela[[i]]<-data.frame(c(estimativas[[i]]$alfa,estimativas[[i]]$beta),
+                     c(estimativas[[i]]$sd.a, estimativas[[i]]$sd.b),
+                     c(estimativas[[i]]$ep.a, estimativas[[i]]$ep.b))
+  colnames(tabela[[i]])<-c("$\\hat{\\theta}$", "sd", "ep")
+}
+```
+
+
+```{r, results='asis'}
+tabela.inicial<-data.frame(theta=theta.verd)
+colnames(tabela.inicial)<-c("$\\theta$")
+tabela.final<-cbind.data.frame(tabela.inicial,tabela[[1]],tabela[[2]],tabela[[3]],tabela[[4]],tabela[[5]])
+row.names(tabela.final)<-paste0("$\\",c("alpha","beta"),"$")
+
+
+format_scientific_latex_aux<-function(x) 
+{
+  formatted <- formatC(x, format = "e", digits = 2)
+  formatted <- gsub("e([+-])", " \\\\times 10^{\\1", formatted)
+  formatted <- gsub("([0-9])$", "\\1}$", formatted)
+  formatted<-paste0("$", formatted)
+  return(formatted)
+}
+format_scientific_latex <- function(x) {
+  ifelse(abs(x)<1e-2, format_scientific_latex_aux(x),round(x, digits = 3))
+}
+
+# Aplicar a formatação a todos os valores numéricos da tabela
+tabela.final[]<- lapply(tabela.final, format_scientific_latex)
+
+tabela_html <- kable(tabela.final, caption = paste0("Tabela 1: Média das estimativas, erro padrão e erro padrão teórico para cada tamanho de amostra"), format = "html", booktabs=T) %>%
+  add_header_above(c(" " = 2,"n=20" = 3,"n=30" = 3, "n=80" = 3,"n=200" = 3,"n=500" = 3)) %>%
+  kable_styling(full_width = F,font_size = 20)
+print(tabela_html)
+```
+
+---
+
+```{r}
+par(mfrow=c(1,5), oma = c(0, 0, 3, 0))
+for(i in 1:5)
+{
+  hist(estimativas[[i]]$alfas, col=cores[2], freq = F, main=paste0("n = ",sizes[i]), xlab=expression(alpha), ylim=c(0,3.5),xlim=c(0,5))
+  curve(dnorm(x,mean=theta.verd[1],sd=sqrt(n.var.teorica[1,1]/sizes[i])),from=-1, to=4, col="maroon", lwd=3, add=T)
+}
+mtext("Figura 1: Histograma das estimativas do parâmetro e distribuição teórica para cada tamanho de amostra", 
+      side = 3,         
+      outer = TRUE,      
+      line = 1,          
+      font = 2,          
+      cex = 1.1)
+```
+
+---
+
+```{r}
+par(mfrow=c(1,5),oma = c(0, 0, 3, 0))
+for(i in 1:5)
+{
+  hist(estimativas[[i]]$betas, col=cores[2], freq = F, main=paste0("n = ",sizes[i]), xlab=expression(beta), ylim=c(0,2.5),xlim=c(1,5))
+  curve(dnorm(x,mean=theta.verd[2],sd=sqrt(n.var.teorica[2,2]/sizes[i])),from=0, to=6, col="maroon", lwd=3, add=T)
+}
+mtext("Figura 2: Histograma das estimativas do parâmetro e distribuição teórica para cada tamanho de amostra", 
+      side = 3,         
+      outer = TRUE,      
+      line = 1,          
+      font = 2,          
+      cex = 1.1)
+```
+
+
+## Referências
+
+Leite, J. G., & Singer, J. M. (1989). *Métodos assintóticos em estatística: fundamentos e aplicações*.
+
+Sen, P. K., Singer, J. M., & Pedroso-de-Lima, A. C. (2010). *From Finite Sample to Asymptotic Methods in Statistics*. Cambridge University Press.
+
+Van der Vaart, A. W. (1998). *Asymptotic Statistics*. Cambridge University Press.
+
+
+
+

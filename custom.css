@@ -1,0 +1,127 @@
+.title {
+  font-size: 1.2em !important; /* Ajuste esse número (2em, 1.5em, 80px) como preferir */
+}
+.reveal .slide {
+  font-size: 26px; /* Ajuste o valor em px, rem ou em como preferir */
+      font-family: "Times New Roman", Times, serif !important;
+
+}
+.quarto-title-author-name {
+    font-size: 28px !important;
+}
+.date{
+  font-size: 25px;
+}
+/* Aplica a Times New Roman em todo o texto da apresentação */
+.reveal, body {
+    font-family: "Times New Roman", Times, Baskerville, Georgia, serif !important;
+}
+
+/* Aplica a fonte com serifa em tudo */
+.reveal, body, .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+    font-family: "Times New Roman", serif !important;
+}
+
+/* Garante que o \text{} do LaTeX também use a mesma serifa elegante */
+.mjx-mtext, .katex .mtext {
+    font-family: "Times New Roman", Georgia, Garamond, serif !important;
+}
+
+/* Garante que o logo apareça em todos os slides na tela e na impressão */
+.reveal .logo {
+    display: block !important;
+    position: fixed !important; /* Mantém o logo fixo na mesma posição em cada folha */
+    bottom: 20px !important;    /* MUDADO: Define distância da parte inferior */
+    right: 20px !important;     /* Distância da direita */
+    top: auto !important;       /* Desativa o topo */
+    max-width: 250px !important; /* AUMENTADO: Tamanho máximo (antes era 120px) */
+    height: auto !important;
+    z-index: 999 !important;     /* Garante que fique por cima de tudo */
+}
+
+/* Ajuste específico para garantir que o logo se repita e fique grande na IMPRESSÃO/PDF */
+@media print {
+    /* Força o logo HTML a aparecer e ser posicionado */
+    .reveal .logo {
+        display: block !important;
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        top: auto !important;
+        max-width: 250px !important; /* Ajuste este valor se ainda quiser maior */
+        height: auto !important;
+    }
+
+    /* Opcional: Se o navegador ainda tentar esconder o logo flutuante, 
+       isso o insere como fundo de cada página para garantir. */
+    .reveal .slide-background {
+        background-image: url("logo.png") !important;
+        background-position: bottom 20px right 20px !important; /* MUDADO: Posição inferior */
+        background-repeat: no-repeat !important;
+        background-size: 250px auto !important; /* MUDADO: Tamanho grande (antes era 80px) */
+    }
+}
+
+.reveal #TOC {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 80% !important;             /* Faz o sumário ocupar a altura útil do slide */
+    margin: 0 auto !important;
+    text-align: left !important;       /* Mantém os tópicos alinhados à esquerda entre si */
+}
+/* 1. Forçar o tamanho e cor do título "Sumário:" */
+.reveal #TOC #toc-title {
+    font-size: 40px !important;       /* Altere o valor para o tamanho desejado */
+    color: #111111 !important;        /* Substitua pela cor pretendida */
+    font-family: "Times New Roman", Times, serif !important;
+    margin-bottom: 40px !important;    /* Dá um espaço grande entre o título e a lista */
+    width: 100% !important;
+}
+
+/* 2. Forçar a estilização dos links do sumário */
+.reveal #TOC nav ul li a {
+    font-size: 30px !important;       /* Altere o tamanho da fonte dos tópicos */
+    color: #111111 !important;        /* Coloque aqui a cor que deseja (Ex: cinzento escuro) */
+    text-decoration: none !important; /* Remove o sublinhado */
+    font-family: "Times New Roman", Times, serif !important;
+}
+
+/* 3. Mudar a cor apenas quando passa o rato por cima do link */
+.reveal #TOC nav ul li a:hover {
+    color: darkblue !important;        /* Cor ao passar o rato (Ex: vermelho) */
+    text-decoration: underline !important;
+    font-family: "Times New Roman", Times, serif !important;
+}
+
+/* 4. Opcional: Se quiser mudar a cor das bolinhas da lista */
+.reveal #TOC nav ul li::marker {
+    color: #111111 !important;        /* Cor da bolinha igual à do título */
+}
+
+
+/* 1. Centraliza e posiciona o sumário na tela */
+.reveal #TOC {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 80% !important;             /* Faz o sumário ocupar a altura útil do slide */
+    margin: 0 auto !important;
+    text-align: left !important;       /* Mantém os tópicos alinhados à esquerda entre si */
+}
+
+/* 2. Garante que o título "Sumário:" fique bem destacado e centralizado */
+.reveal #TOC #toc-title {
+    font-size: 50px !important;
+    margin-bottom: 40px !important;    /* Dá um espaço grande entre o título e a lista */
+    text-align: center !important;
+    width: 100% !important;
+}
+
+/* 3. Ajusta o espaçamento entre os tópicos da lista */
+.reveal #TOC nav ul li {
+    margin-bottom: 20px !important;    /* Aumenta o espaço vertical entre os itens do sumário */
+}
+
+/* 4. Deixa a fonte dos tópicos ligeiramente maior para preencher a tela */
+.reveal #TOC nav ul li a {
+    font-size: 34px !important;        /* Ajuste esse valor se achar muito grande/pequeno */
+}
